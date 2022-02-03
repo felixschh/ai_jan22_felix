@@ -8,6 +8,8 @@ class Soda(Drink):
     def __init__(self, name, fillingstation, amount_of_sugar, selling_price=0): # constructor
         super().__init__(name, fillingstation, selling_price)
         self.amount_of_sugar = amount_of_sugar
+        if selling_price > 0:
+            self.__selling_price = selling_price
 
     
     @property

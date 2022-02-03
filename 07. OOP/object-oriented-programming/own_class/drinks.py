@@ -3,6 +3,8 @@ class Drink:
         self.name = name
         self.fillingstation = fillingstation
         self.__selling_price = 0 
+        if selling_price > 0:
+            self.__selling_price = selling_price
     
     @property
     # GETTER
