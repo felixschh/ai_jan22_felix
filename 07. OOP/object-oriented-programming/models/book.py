@@ -13,7 +13,6 @@ class Book(Product):
             self.__selling_price = selling_price
     
     @property
-    # GETTER
     def selling_price(self):
         return self.__selling_price
 

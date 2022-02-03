@@ -21,8 +21,6 @@ class Product:
     #SETTER
     @selling_price.setter
     def selling_price(self, price):
-        if price <= 0:
-            raise ValueError("The price must be greater that 0, we don't give away books for free!")
         self.__selling_price = price
 
     def add_rating(self, stars):
