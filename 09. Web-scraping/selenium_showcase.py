@@ -1,12 +1,14 @@
+import selenium
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from time import sleep
 
 
-url = "https://www.amazon.es/s?k=laptop&__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&ref=nb_sb_noss_1"
-my_driver = "chromedriver.exe"
+url = "https://www.amazon.es/"
+my_driver = "/Users/felixschekerka/Desktop/Strive School/ai_jan22_felix/09. Web-scraping/chromedriver"
 
 driver = webdriver.Chrome(my_driver)
-webdriver.c
+# webdriver.c
 
 driver.get(url)
 
