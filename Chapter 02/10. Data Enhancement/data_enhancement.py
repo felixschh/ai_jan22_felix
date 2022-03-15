@@ -23,7 +23,7 @@ from xgboost               import XGBRegressor
 from lightgbm              import LGBMRegressor
 from catboost              import CatBoostRegressor
 
-data = pd.read_csv(r'data/london_merged.csv')
+data = pd.read_csv('data/london_merged.csv')
 
 np.random.seed(0)
 
