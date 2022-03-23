@@ -2,7 +2,7 @@ from os import pardir
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv("climate.csv")
+data = pd.read_csv("/Users/felixschekerka/Desktop/Strive School/ai_jan22_felix/Chapter 02/12. TimeSeries/climate.csv")
 data = data.drop(["Date Time"], axis=1)
 
 def pairing(data, seq_len=6):
