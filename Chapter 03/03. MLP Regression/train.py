@@ -1,6 +1,7 @@
-#import the needed libraries
+# import the needed libraries
+import time
 
-import data_handler as dh           # yes, you can import your code. Cool!
+import data_handler as dh  # yes, you can import your code. Cool!
 import torch
 import torch.optim as optim
 import torch.nn as nn
@@ -10,53 +11,52 @@ import numpy as np
 
 from model import Network
 
-x_train, x_test, y_train, y_test = dh.load_data('Chapter 03/03. MLP Regression/data/turkish_stocks.csv')
-
-model = Network()
-
-lr = 1e-1
-n_epochs = 100
-
-optimizer = torch.optim.SGD(model.parameters(), lr=0.2)
-loss_func = torch.nn.MSELoss()
-
-for epoch in range(n_epochs):
-    model.train()
-    optimizer.zero_grad()
-
-    y_hat = model(x_train)
-    
-    loss = loss_func(y_train, y_hat)
-    loss.backward()    
-    optimizer.step()
-    losses = loss.item()
-
-    
-train_loader = dh.to_batches(x_train, x_test, y_train, y_test, 20)
-
-losses = []
-val_losses = []
-
-for epoch in range(n_epochs):
-    for x_batch, y_batch in train_loader:
-        x_batch = x_batch
-        y_batch = y_batch
-
-        loss = losses(x_batch, y_batch)
-        losses.append(loss)
-        
-    with torch.no_grad():
-        for x_val, y_val in val_loader:
-            x_val = x_val
-            y_val = y_val
-            
-            model.eval()
-
-            yhat = model(x_val)
-            val_loss = loss_func(y_val, yhat)
-            val_losses.append(val_loss.item())
-
-print(model.state_dict())
-
-
 # Remember to validate your model: with torch.no_grad() ...... model.eval .........model.train
+
+model = Network(8)
+
+pth = 'Chapter 03/03. MLP Regression/data/turkish_stocks.csv'
+
+x_train, x_test, y_train, y_test = dh.load_data(pth)
+
+optimizer = torch.optim.SGD(model.parameters(), lr=0.003)
+criterion = torch.nn.MSELoss()
+
+epochs = 10
+
+start_time = time.time()
+
+train = []
+test = []
+
+for epoch in range(epochs):
+    optimizer.zero_grad()
+    x_train_batch, x_test_batch, y_train_batch, y_test_batch = dh.to_batches(x_train, x_test, y_train, y_test, 7)
+    running_loss = 0
+    running_loss_test = 0
+
+    for n in range(x_train_batch.shape[0]):
+        pred = model.forward(x_train_batch[n])
+        loss = criterion(pred, y_train_batch[n])
+
+        loss.backward()
+        optimizer.step()
+
+        with torch.no_grad():
+            test_pred = model.forward(x_test_batch)
+            test_loss = criterion(test_pred, y_test_batch)
+
+        running_loss += loss.item()
+        running_loss_test += test_loss.item()
+    train.append(running_loss/len(x_train_batch))
+    test.append(running_loss_test/len(x_test_batch))
+    print(f'{epoch + 1}/ {epochs}')
+
+train_time = time.time() - start_time
+print(f'Training time: {train_time}')
+
+plt.plot(train, label='train Loss')
+plt.plot(test, label='test Loss')
+
+plt.legend()
+plt.show()
