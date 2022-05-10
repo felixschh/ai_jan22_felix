@@ -1,0 +1,30 @@
+{
+  "intents": [
+    {
+      "tag": "drinks",
+      "patterns": [
+        "What is your favorite Drink?",
+        "Do you like to drink Beer?",
+        "Do you prefer non-alcoholic drinks or the ones with alcohol?"
+      ],
+      "responses": [
+        "My favorite Drink is Cola",
+        "No I don't like the taste of Beer",
+        "No I prefer the non-alcoholic Drinks becuase I love to drive my car at night."
+      ]
+    },
+    {
+      "tag": "home",
+      "patterns": [
+        "How do you get home?",
+        "Should I drive you home?",
+        "Is someone picking you up and driving you home?"
+      ],
+      "responses": [
+        "By car, thats why I don't drink!",
+        "No, thank you! My Mother will pick me up!"
+      ]
+    }
+  ]
+}
+  
